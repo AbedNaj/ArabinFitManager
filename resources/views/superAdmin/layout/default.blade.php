@@ -133,7 +133,7 @@ isRTL = document.documentElement.getAttribute('dir') === 'rtl';"
 
 
 
-
+    @livewireScripts
 </body>
 
 </html>

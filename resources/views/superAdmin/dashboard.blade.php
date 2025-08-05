@@ -234,69 +234,7 @@
             </div>
         </div>
 
-        <!-- Recent Orders -->
-        <div class="bg-bg p-5 rounded-xl border border-border">
-            <div class="flex justify-between items-center mb-4" :class="{ 'flex-row-reverse': isRTL }">
-                <h3 class="font-bold" x-text="isRTL ? 'الطلبات الحديثة' : 'Recent Orders'"></h3>
-                <button class="text-primary hover:text-primary/80 text-sm font-medium"
-                    x-text="isRTL ? 'عرض الكل' : 'View All'"></button>
-            </div>
 
-            <div class="overflow-x-auto">
-                <table class="w-full" :class="{ 'text-right': isRTL }">
-                    <thead>
-                        <tr class="text-sm text-secondary border-b border-border">
-                            <th class="pb-3" x-text="isRTL ? 'رقم الطلب' : 'Order ID'"></th>
-                            <th class="pb-3" x-text="isRTL ? 'العميل' : 'Customer'"></th>
-                            <th class="pb-3" x-text="isRTL ? 'التاريخ' : 'Date'"></th>
-                            <th class="pb-3" x-text="isRTL ? 'المبلغ' : 'Amount'"></th>
-                            <th class="pb-3" x-text="isRTL ? 'الحالة' : 'Status'"></th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-border">
-                        <tr>
-                            <td class="py-3">#ORD-001</td>
-                            <td class="py-3" x-text="isRTL ? 'علي حسن' : 'John Smith'"></td>
-                            <td class="py-3">Jan 12, 2023</td>
-                            <td class="py-3">$249.00</td>
-                            <td class="py-3"><span class="px-2 py-1 rounded-full text-xs bg-green-100 text-green-800"
-                                    x-text="isRTL ? 'مكتمل' : 'Completed'"></span></td>
-                        </tr>
-                        <tr>
-                            <td class="py-3">#ORD-002</td>
-                            <td class="py-3" x-text="isRTL ? 'سارة محمد' : 'Emma Johnson'"></td>
-                            <td class="py-3">Jan 14, 2023</td>
-                            <td class="py-3">$149.99</td>
-                            <td class="py-3"><span class="px-2 py-1 rounded-full text-xs bg-yellow-100 text-yellow-800"
-                                    x-text="isRTL ? 'قيد الانتظار' : 'Pending'"></span></td>
-                        </tr>
-                        <tr>
-                            <td class="py-3">#ORD-003</td>
-                            <td class="py-3" x-text="isRTL ? 'أحمد خالد' : 'Michael Brown'"></td>
-                            <td class="py-3">Jan 15, 2023</td>
-                            <td class="py-3">$89.50</td>
-                            <td class="py-3"><span class="px-2 py-1 rounded-full text-xs bg-green-100 text-green-800"
-                                    x-text="isRTL ? 'مكتمل' : 'Completed'"></span></td>
-                        </tr>
-                        <tr>
-                            <td class="py-3">#ORD-004</td>
-                            <td class="py-3" x-text="isRTL ? 'نورا عبد الله' : 'Sarah Williams'"></td>
-                            <td class="py-3">Jan 16, 2023</td>
-                            <td class="py-3">$299.00</td>
-                            <td class="py-3"><span class="px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800"
-                                    x-text="isRTL ? 'تم الشحن' : 'Shipped'"></span></td>
-                        </tr>
-                        <tr>
-                            <td class="py-3">#ORD-005</td>
-                            <td class="py-3" x-text="isRTL ? 'يوسف عبد الرحمن' : 'David Miller'"></td>
-                            <td class="py-3">Jan 17, 2023</td>
-                            <td class="py-3">$175.25</td>
-                            <td class="py-3"><span class="px-2 py-1 rounded-full text-xs bg-yellow-100 text-yellow-800"
-                                    x-text="isRTL ? 'قيد الانتظار' : 'Pending'"></span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+
     </div>
 @endsection
