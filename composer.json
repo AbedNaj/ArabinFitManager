@@ -1,4 +1,10 @@
 {
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/tallstackui/tallstackui"
+        }
+    ],
     "$schema": "https://getcomposer.org/schema.json",
     "name": "laravel/laravel",
     "type": "project",
@@ -13,7 +19,9 @@
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "spatie/laravel-permission": "^6.21",
-        "stancl/tenancy": "^3.9"
+        "stancl/tenancy": "^3.9",
+        "tallstackui/tallstackui": "2.0.0",
+        "wireui/wireui": "^2.4"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
