@@ -4,6 +4,8 @@ namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tenant;
+use App\Models\Tenants\User;
+use App\Models\Tenants\UserType;
 use Illuminate\Http\Request;
 
 class TenantController extends Controller
@@ -52,12 +54,14 @@ class TenantController extends Controller
         tenancy()->initialize($tenant);
 
 
-        \App\Models\Tenants\User::create([
+
+        $user = User::create([
 
             'email' => $validated['tenant_id'] . '@' . env('APP_DOMAIN', 'arabinfitmanager.test'),
             'password' => bcrypt('password'),
         ]);
 
+        $user->assignRole('admin');
         \App\Models\Tenants\Gym::create([
             'name' => $validated['name'],
             'owner_name' => $validated['owner_name'] ?? '',

@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Tenants\User;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use App\Http\Controllers\Controller;
 
-class UserController extends Controller
+
+use App\Models\Tenants\Customer;
+use App\Http\Requests\Admin\customer\StoreCustomerRequest;
+use App\Http\Requests\Admin\customer\UpdateCustomerRequest;
+
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +30,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUserRequest $request)
+    public function store(StoreCustomerRequest $request)
     {
         //
     }
@@ -35,7 +38,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(Customer $customer)
     {
         //
     }
@@ -43,7 +46,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(Customer $customer)
     {
         //
     }
@@ -51,7 +54,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateCustomerRequest $request, Customer $customer)
     {
         //
     }
@@ -59,7 +62,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(Customer $customer)
     {
         //
     }
