@@ -28,6 +28,7 @@
 
                 <x-superAdmin.navButton :href="route('admin.customers.index')" :icon="view('components.icons.customers')" :text="__('sidebar.admin.customers')" :isActive="Request()->routeIs('admin.customers*')" />
 
+                <x-superAdmin.navButton :href="route('admin.plans.index')" :icon="view('components.icons.plan')" :text="__('sidebar.admin.plan')" :isActive="Request()->routeIs('admin.plans*')" />
 
             </nav>
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\PlanController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
@@ -45,6 +46,15 @@ Route::middleware([
                 Route::post('/customers', 'store')->name('store');
                 Route::get('/customers/{customer}', 'show')->name('show');
                 Route::patch('/customers/{customer}', 'update')->name('update');
+            });
+
+
+            Route::controller(PlanController::class)->name('plans.')->group(function () {
+                Route::get('/plans', 'index')->name('index');
+                Route::get('/plans/create', 'create')->name('create');
+                Route::post('/plans', 'store')->name('store');
+                Route::get('/plans/{plan}', 'show')->name('show');
+                Route::patch('/plans/{plan}', 'update')->name('update');
             });
         });
     });

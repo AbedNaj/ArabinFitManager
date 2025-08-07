@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Tenants\User;
 use App\Models\Tenants\UserType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -36,6 +37,7 @@ return new class extends Migration
             $table->integer('last_activity')->index();
         });
     }
+
 
     /**
      * Reverse the migrations.

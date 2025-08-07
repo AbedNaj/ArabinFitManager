@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 
 
 use App\Models\Tenants\Customer;
-use App\Http\Requests\Admin\customer\StoreCustomerRequest;
-use App\Http\Requests\Admin\customer\UpdateCustomerRequest;
+use App\Http\Requests\Admin\Customer\StoreCustomerRequest;
+use App\Http\Requests\Admin\Customer\UpdateCustomerRequest;
 
 class CustomerController extends Controller
 {

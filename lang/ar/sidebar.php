@@ -15,6 +15,7 @@ return [
         'trainers' => 'المدربين',
         'subscriptions' => 'الاشتراكات',
         'payments' => 'المدفوعات',
+        'plan' => 'الخطط',
         'settings' => 'الإعدادات',
     ],
 ];
