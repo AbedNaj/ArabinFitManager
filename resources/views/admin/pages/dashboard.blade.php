@@ -1,4 +1,4 @@
-@extends('superAdmin.layout.default')
+@extends('admin.layout.default')
 @section('content')
     <div class="max-w-7xl mx-auto">
         <div class="flex justify-between items-center mb-6" :class="{ 'flex-row-reverse': isRTL }">

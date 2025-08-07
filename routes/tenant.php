@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\CustomerController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
@@ -37,6 +38,14 @@ Route::middleware([
             Route::get('/dashboard', function () {
                 return view('admin.pages.dashboard');
             })->name('dashboard');
+
+            Route::controller(CustomerController::class)->name('customers.')->group(function () {
+                Route::get('/customers', 'index')->name('index');
+                Route::get('/customers/create', 'create')->name('create');
+                Route::post('/customers', 'store')->name('store');
+                Route::get('/customers/{customer}', 'show')->name('show');
+                Route::patch('/customers/{customer}', 'update')->name('update');
+            });
         });
     });
 });

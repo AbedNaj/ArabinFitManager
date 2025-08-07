@@ -16,7 +16,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.pages.customer.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.customer.create');
     }
 
     /**
@@ -32,7 +32,10 @@ class CustomerController extends Controller
      */
     public function store(StoreCustomerRequest $request)
     {
-        //
+
+        $validated = $request->validated();
+        Customer::create($validated);
+        return redirect()->route('admin.customers.index')->with('success', __('customer.create_success'));
     }
 
     /**
@@ -40,7 +43,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        return view('admin.pages.customer.show', ['data'   => $customer]);
     }
 
     /**
@@ -56,7 +59,17 @@ class CustomerController extends Controller
      */
     public function update(UpdateCustomerRequest $request, Customer $customer)
     {
-        //
+        $validated = $request->validated();
+
+        $customer->fill([
+            'name' => $validated['name'],
+            'phone' => $validated['phone'] ?? null,
+        ]);
+        if ($customer->isDirty()) {
+            $customer->save();
+            return redirect()->back()->with('success', __('common.update_success'));
+        }
+        return redirect()->back()->with('warning', __('common.no_changes'));
     }
 
     /**

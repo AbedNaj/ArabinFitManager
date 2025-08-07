@@ -7,6 +7,7 @@ use App\Models\Tenant;
 use App\Models\Tenants\User;
 use App\Models\Tenants\UserType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class TenantController extends Controller
 {
@@ -58,7 +59,7 @@ class TenantController extends Controller
         $user = User::create([
 
             'email' => $validated['tenant_id'] . '@' . env('APP_DOMAIN', 'arabinfitmanager.test'),
-            'password' => bcrypt('password'),
+            'password' => Hash::make($validated['password']),
         ]);
 
         $user->assignRole('admin');

@@ -9,4 +9,12 @@ return [
         'reports' => 'التقارير',
         'logout' => 'تسجيل الخروج',
     ],
+    'admin' => [
+        'dashboard' => 'لوحة التحكم',
+        'customers' => 'الزبائن',
+        'trainers' => 'المدربين',
+        'subscriptions' => 'الاشتراكات',
+        'payments' => 'المدفوعات',
+        'settings' => 'الإعدادات',
+    ],
 ];

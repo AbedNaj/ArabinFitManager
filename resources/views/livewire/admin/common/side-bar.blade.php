@@ -24,6 +24,9 @@
 
         <div class="flex-1 overflow-y-auto scrollbar-hide p-4">
             <nav class="space-y-1">
+                <x-superAdmin.navButton :href="route('admin.dashboard')" :icon="view('components.icons.home')" :text="__('sidebar.admin.dashboard')" :isActive="Request()->routeIs('admin.dashboard*')" />
+
+                <x-superAdmin.navButton :href="route('admin.customers.index')" :icon="view('components.icons.customers')" :text="__('sidebar.admin.customers')" :isActive="Request()->routeIs('admin.customers*')" />
 
 
             </nav>

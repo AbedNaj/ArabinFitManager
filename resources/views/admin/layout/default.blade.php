@@ -118,16 +118,29 @@ isRTL = document.documentElement.getAttribute('dir') === 'rtl';"
 
 <body class="bg-surface text-text font-sans flex h-screen overflow-hidden">
 
-    @livewire('super-admin.common.side-bar')
+    @livewire('admin.common.side-bar')
 
     <div class="flex-1 flex flex-col overflow-hidden">
 
         @livewire('super-admin.common.header')
 
-
         <main class="flex-1 overflow-y-auto p-4 bg-surface">
             @yield('content')
+
         </main>
+        <div class="space-y-4">
+            @if (session('success'))
+                <x-alert title="{{ session('success') }}" positive />
+            @endif
+
+            @if (session('warning'))
+                <x-alert title="{{ session('warning') }}" warning />
+            @endif
+
+            @if (session('error'))
+                <x-alert title="{{ session('error') }}" negative />
+            @endif
+        </div>
     </div>
 
 
