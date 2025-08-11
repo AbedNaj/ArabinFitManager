@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Admin\Plan;
+namespace App\Http\Requests\Admin\Debt;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePlanRequest extends FormRequest
+class StoreDebtRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,9 +22,7 @@ class UpdatePlanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'duration' => 'required|integer|min:0',
-            'price' => 'required|numeric|min:0'
+            //
         ];
     }
 }

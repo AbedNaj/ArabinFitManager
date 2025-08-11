@@ -10,5 +10,11 @@ return [
     'show_customer_info' => 'عرض معلومات الزبون',
     'edit_customer_info' => 'تعديل معلومات الزبون',
     'create_success' => 'تم اضافة الزبون بنجاح',
+    'registered' => 'مسجل',
+    'not_registered' => 'غير مسجل',
+    'frozen' => 'مجمد',
+    'stopped' => 'موقوف',
+    'status' => 'الحالة'
+
 
 ];

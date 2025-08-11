@@ -1,0 +1,50 @@
+<?php
+
+return [
+    'title' => 'التسجيل',
+    'show_description' => 'عرض شامل لمعلومات الاشتراك وحالة الدفع والخطة.',
+    'customer_name' => 'إسم الزبون',
+    'plan_name' => 'نوع الخطة',
+    'status' => 'حالة التسجيل',
+    'start_date' => 'تاريخ التسجيل',
+    'end_date' => 'تاريخ انتهاء الاشتراك',
+    'create' => 'إشتراك جديد',
+    'select_customer' => 'اختر الزبون',
+    'register' => 'تسجيل',
+    'select_a_customer' => 'اختر زبون',
+    'pick_customer' => 'اختر زبون',
+    'plan' => 'الخطة',
+    'pick_date' => 'اختر التاريخ',
+    'plan_price' => 'سعر الخطة',
+    'select_plan' => 'اختر الخطة',
+
+
+    'status_waiting'  => 'بانتظار البداية',
+    'status_active'   => 'نشط',
+    'status_expired'  => 'منتهي',
+    'status_freezed'  => 'مجمّد',
+    'status_stopped'  => 'موقوف',
+
+    'registred' => 'تم تسجيل الزبون',
+    'successfully' => 'بنجاح',
+
+
+    'cancel' => 'إلغاء التسجيل',
+    'id' => 'رقم التسجيل',
+    'information' => 'المعلومات',
+    'partial_payment' => 'مدفوع جزئياً',
+    'payment' => 'الدفع',
+    'total_amount' => 'المبلغ الكلي',
+    'paid_amount' => 'المدفوع',
+    'remaining' => 'المتبقي',
+    'payment_history' => 'سجل المدفوعات',
+    'last_update' => 'آخر تحديث',
+    'add_payment' => 'إضافة دفعة',
+    'date' => 'التاريخ',
+    'method' => 'الطريقة',
+    'amount' => 'المبلغ',
+    'employee' => 'الموظف',
+    'cash' => 'نقدي',
+    'bank_transfer' => 'تحويل بنكي',
+    'late_payments_note' => 'المدفوعات المتأخرة ستظهر هنا عند إضافتها.',
+];

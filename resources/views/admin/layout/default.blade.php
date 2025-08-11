@@ -125,6 +125,7 @@ isRTL = document.documentElement.getAttribute('dir') === 'rtl';"
         @livewire('super-admin.common.header')
 
         <main class="flex-1 overflow-y-auto p-4 bg-surface">
+
             @yield('content')
 
         </main>

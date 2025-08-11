@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin\Registration;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUserTypeRequest extends FormRequest
+class StoreRegistrationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,8 +21,6 @@ class UpdateUserTypeRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 }

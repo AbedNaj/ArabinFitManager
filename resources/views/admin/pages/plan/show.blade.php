@@ -51,6 +51,9 @@
 
                             <x-admin.show-read-only :label="__('plan.duration')" :icon="view('components.icons.white.duration')">
                                 {{ $data->duration }} {{ __('plan.days') }}</x-admin.show-read-only>
+
+                            <x-admin.show-read-only :label="__('plan.price')" :icon="view('components.icons.white.dollar')">
+                                {{ $data->price }} </x-admin.show-read-only>
                         </div>
                     </div>
                 </div>
@@ -76,6 +79,12 @@
 
                                     <x-input type="number" name="duration" value="{{ old('phone', $data->duration) }}"
                                         label="{{ __('plan.duration') }}" />
+                                </div>
+
+                                <div class="space-y-2">
+
+                                    <x-input type="number" name="price" value="{{ old('phone', $data->price) }}"
+                                        label="{{ __('plan.price') }}" />
                                 </div>
                             </div>
 

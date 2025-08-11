@@ -5,6 +5,9 @@ declare(strict_types=1);
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\PlanController;
+use App\Http\Controllers\Admin\RegistrationController;
+use App\Http\Middleware\Auth\TenantLoginCheck;
+use App\Http\Middleware\CustomerViewPermission;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
@@ -25,6 +28,7 @@ Route::middleware([
     'web',
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
+
 ])->group(function () {
     Route::get('/', function () {
         return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
@@ -35,12 +39,12 @@ Route::middleware([
             Route::post('/login', 'store')->name('login.store');
         });
 
-        Route::middleware('auth:tenant')->group(function () {
+        Route::middleware(TenantLoginCheck::class)->group(function () {
             Route::get('/dashboard', function () {
                 return view('admin.pages.dashboard');
             })->name('dashboard');
 
-            Route::controller(CustomerController::class)->name('customers.')->group(function () {
+            Route::controller(CustomerController::class)->middleware(CustomerViewPermission::class)->name('customers.')->group(function () {
                 Route::get('/customers', 'index')->name('index');
                 Route::get('/customers/create', 'create')->name('create');
                 Route::post('/customers', 'store')->name('store');
@@ -55,6 +59,14 @@ Route::middleware([
                 Route::post('/plans', 'store')->name('store');
                 Route::get('/plans/{plan}', 'show')->name('show');
                 Route::patch('/plans/{plan}', 'update')->name('update');
+            });
+
+            Route::controller(RegistrationController::class)->name('registrations.')->group(function () {
+                Route::get('/registrations', 'index')->name('index');
+                Route::get('/registrations/create', 'create')->name('create');
+                Route::post('/registrations', 'store')->name('store');
+                Route::get('/registrations/{registration}', 'show')->name('show');
+                Route::patch('/registrations/{registration}', 'update')->name('update');
             });
         });
     });

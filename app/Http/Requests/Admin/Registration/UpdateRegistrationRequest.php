@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin\Registration;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUserTypeRequest extends FormRequest
+class UpdateRegistrationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

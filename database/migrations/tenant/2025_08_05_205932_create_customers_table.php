@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('phone')->nullable();
+            $table->enum('status', ['registered', 'not_registered'])->default('not_registered');
             $table->timestamps();
         });
     }

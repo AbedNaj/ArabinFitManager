@@ -11,4 +11,11 @@ class Customer extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+
+    public function registrations()
+    {
+
+        return $this->hasMany(Registration::class);
+    }
 }

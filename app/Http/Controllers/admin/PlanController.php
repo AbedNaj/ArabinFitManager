@@ -36,7 +36,8 @@ class PlanController extends Controller
         Plan::create(
             [
                 'name' => $validated['name'],
-                'duration' => $validated['duration']
+                'duration' => $validated['duration'],
+                'price' => $validated['price']
             ]
         );
         return redirect()->route('admin.plans.index')->with('success', __('plan.create_success'));
@@ -68,6 +69,7 @@ class PlanController extends Controller
         $plan->fill([
             'name' => $validated['name'],
             'duration' => $validated['duration'],
+            'price' => $validated['price']
         ]);
         if ($plan->isDirty()) {
             $plan->save();

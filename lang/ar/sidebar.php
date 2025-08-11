@@ -17,5 +17,6 @@ return [
         'payments' => 'المدفوعات',
         'plan' => 'الخطط',
         'settings' => 'الإعدادات',
+        'registration' => 'التسجيل',
     ],
 ];

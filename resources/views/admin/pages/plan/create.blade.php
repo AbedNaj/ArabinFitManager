@@ -11,14 +11,14 @@
 
 
             <x-input name="name" label="{{ __('plan.name') }}" />
-            <x-input type="number" name="duration" label="{{ __('plan.duration') }}" />
-
+            <x-input type="number" value="0" min="0" name="duration" label="{{ __('plan.duration') }}" />
+            <x-input type="number" value="0" min="0" name="price" label="{{ __('plan.price') }}" />
 
 
             <div class="mt-2">
                 <x-button type="submit" label="{{ __('common.create') }}" />
-                <x-button wire:navigate href="{{ route('admin.customers.index') }}" label="{{ __('common.cancel') }}"
-                    outline hover="warning" focus:solid.gray />
+                <x-button wire:navigate href="{{ route('admin.plans.index') }}" label="{{ __('common.cancel') }}" outline
+                    hover="warning" focus:solid.gray />
 
             </div>
         </form>

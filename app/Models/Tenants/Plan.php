@@ -10,4 +10,10 @@ class Plan extends Model
     /** @use HasFactory<\Database\Factories\Tenants\PlanFactory> */
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function registrations()
+    {
+
+        return $this->hasMany(Registration::class);
+    }
 }
