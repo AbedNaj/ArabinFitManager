@@ -2,7 +2,7 @@
 
 namespace App\Models\Tenants;
 
-use App\Livewire\Admin\Registration\Registration;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,7 +10,7 @@ class Debt extends Model
 {
     /** @use HasFactory<\Database\Factories\Tenants\DebtFactory> */
     use HasFactory;
-
+    protected $guarded = ['id'];
     public function customer()
     {
 
@@ -20,5 +20,10 @@ class Debt extends Model
     {
 
         return $this->belongsTo(Registration::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
     }
 }

@@ -26,6 +26,7 @@
             <nav class="space-y-1">
                 <x-superAdmin.navButton :href="route('admin.dashboard')" :icon="view('components.icons.home')" :text="__('sidebar.admin.dashboard')" :isActive="Request()->routeIs('admin.dashboard*')" />
                 <x-superAdmin.navButton :href="route('admin.registrations.index')" :icon="view('components.icons.registration')" :text="__('sidebar.admin.registration')" :isActive="Request()->routeIs('admin.registrations*')" />
+                <x-superAdmin.navButton :href="route('admin.debts.index')" :icon="view('components.icons.debt')" :text="__('sidebar.admin.debt')" :isActive="Request()->routeIs('admin.debts*')" />
 
                 <x-superAdmin.navButton :href="route('admin.customers.index')" :icon="view('components.icons.customers')" :text="__('sidebar.admin.customers')" :isActive="Request()->routeIs('admin.customers*')" />
 

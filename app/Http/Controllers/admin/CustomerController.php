@@ -16,6 +16,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
+
         return view('admin.pages.customer.index');
     }
 
@@ -34,7 +35,11 @@ class CustomerController extends Controller
     {
 
         $validated = $request->validated();
-        Customer::create($validated);
+
+        $customer =  Customer::create($validated);
+        if ($validated['register']) {
+            return redirect()->route('admin.registrations.create', ['customer' => $customer->id])->with('success', __('customer.create_success'));
+        }
         return redirect()->route('admin.customers.index')->with('success', __('customer.create_success'));
     }
 
@@ -67,7 +72,7 @@ class CustomerController extends Controller
         ]);
         if ($customer->isDirty()) {
             $customer->save();
-            return redirect()->back()->with('success', __('common.update_success'));
+            return redirect()->route('admin.customers.index')->with('success', __('common.update_success'));
         }
         return redirect()->back()->with('warning', __('common.no_changes'));
     }

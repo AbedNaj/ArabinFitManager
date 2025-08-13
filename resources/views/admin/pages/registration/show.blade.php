@@ -3,7 +3,10 @@
 @section('content')
     @php
         $registrationStatus = App\Enums\RegistrationStatusEnum::tryFrom($data->status);
+        $registrationPaymentStatus = App\Enums\RegistrationPaymentStatusEnum::tryFrom($data->payment_status);
 
+        $activeStatus = App\Enums\RegistrationStatusEnum::ACTIVE->value;
+        $freezdStatus = App\Enums\RegistrationStatusEnum::FREEZED->value;
     @endphp
     <div class="min-h-screen bg-gradient-to-br from-bg to-surface py-4 sm:py-8">
         <div class="max-w-6xl mx-auto px-4">
@@ -21,9 +24,13 @@
                         </div>
 
                         <div class="flex space-x-2 ">
-                            <x-button label="{{ __('registration.customer_name') }}" />
+                            <x-button wire:navigate
+                                href="{{ route('admin.customers.show', ['customer' => $data->customer]) }}"
+                                label="{{ __('registration.customer_details') }}" />
+                            @if ($data->status == $activeStatus || $data->status == $freezdStatus)
+                                <x-button negative icon="x-mark" label="{{ __('registration.cancel') }}" />
+                            @endif
 
-                            <x-button label="{{ __('registration.cancel') }}" />
 
                         </div>
                     </div>
@@ -45,7 +52,7 @@
                                 <span
                                     class="text-xs px-2 py-0.5 rounded bg-{{ $registrationStatus->color() }}-100 text-{{ $registrationStatus->color() }}-700 border border-{{ $registrationStatus->color() }}-200">{{ $registrationStatus->label() }}</span>
                                 <span
-                                    class="text-xs px-2 py-0.5 rounded bg-blue-100 text-blue-700 border border-blue-200">{{ __('registration.partial_payment') ?? 'مدفوع جزئياً' }}</span>
+                                    class="text-xs px-2 py-0.5 rounded bg-{{ $registrationPaymentStatus->color() }}-100 text-{{ $registrationPaymentStatus->color() }}-700 border border-{{ $registrationPaymentStatus->color() }}-200">{{ $registrationPaymentStatus->label() }}</span>
                             </div>
                         </div>
 
@@ -65,23 +72,24 @@
                         </div>
 
                         <div class="rounded-xl border border-border bg-bg p-4 shadow-sm">
-                            <h3 class="text-sm text-secondary">{{ __('registration.payment') ?? 'الدفع' }}</h3>
+                            <h3 class="text-sm text-secondary">{{ __('registration.payment') }}</h3>
                             <div class="mt-2 grid grid-cols-2 gap-2 text-sm">
                                 <div class="space-y-1">
-                                    <p class="text-secondary">{{ __('registration.total_amount') ?? 'المبلغ الكلي' }}</p>
-                                    <p class="font-medium text-text">150 ₪</p>
+                                    <p class="text-secondary">{{ __('registration.total_amount') }}</p>
+                                    <p class="font-medium text-text">{{ $data->price_at_signup }} ₪</p>
                                 </div>
                                 <div class="space-y-1">
-                                    <p class="text-secondary">{{ __('registration.paid_amount') ?? 'المدفوع' }}</p>
-                                    <p class="font-medium text-text">100 ₪</p>
+                                    <p class="text-secondary">{{ __('registration.paid_amount') }}</p>
+                                    <p class="font-medium text-text">{{ $totalPaid }} ₪</p>
                                 </div>
                             </div>
                             <div class="mt-3">
                                 <div class="w-full h-2 rounded bg-border overflow-hidden">
-                                    <div class="h-2 bg-primary" style="width: 66%;"></div>
+                                    <div class="h-2 bg-primary"
+                                        style="width: {{ ($totalPaid / $data->price_at_signup) * 100 }}%;"></div>
                                 </div>
-                                <p class="mt-2 text-xs text-secondary">{{ __('registration.remaining') ?? 'المتبقي' }}:
-                                    <span class="font-medium text-text">50 ₪</span>
+                                <p class="mt-2 text-xs text-secondary">{{ __('registration.remaining') }}:
+                                    <span class="font-medium text-text">{{ $remainingAmount }} ₪</span>
                                 </p>
                             </div>
                         </div>
@@ -92,19 +100,14 @@
                             <div class="flex items-center gap-2">
                                 <h2 class="text-lg font-semibold text-text">
                                     {{ __('registration.payment_history') ?? 'سجل المدفوعات' }}</h2>
-                                <span
-                                    class="text-[10px] px-2 py-0.5 rounded bg-surface border border-border text-secondary">{{ __('registration.last_update') ?? 'آخر تحديث' }}:
-                                    12:35</span>
+
                             </div>
-                            <a href="#"
-                                class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-r from-primary to-indigo-600 dark:from-primary dark:to-purple-600 text-white shadow hover:opacity-95 transition">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                        d="M12 4v16m8-8H4" />
-                                </svg>
-                                <span class="text-sm">{{ __('registration.add_payment') ?? 'إضافة دفعة' }}</span>
-                            </a>
+                            @if ($remainingAmount > 0)
+                                <x-button wire:navigate
+                                    href="{{ route('admin.debts.show', ['debt' => $data->debt->id]) }}"
+                                    label="{{ __('registration.add_payment') }}" />
+                            @endif
+
                         </div>
 
                         <div class="overflow-hidden rounded-lg border border-border">
@@ -112,35 +115,41 @@
                                 <thead class="bg-surface">
                                     <tr>
                                         <th class="p-3 text-start text-secondary font-medium">
-                                            {{ __('registration.date') ?? 'التاريخ' }}</th>
+                                            {{ __('registration.date') }}</th>
+
                                         <th class="p-3 text-start text-secondary font-medium">
-                                            {{ __('registration.method') ?? 'الطريقة' }}</th>
-                                        <th class="p-3 text-start text-secondary font-medium">
-                                            {{ __('registration.amount') ?? 'المبلغ' }}</th>
-                                        <th class="p-3 text-start text-secondary font-medium">
-                                            {{ __('registration.employee') ?? 'الموظف' }}</th>
+                                            {{ __('registration.amount') }}</th>
+
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-border">
-                                    <tr class="hover:bg-surface/60">
-                                        <td class="p-3 text-text">2025-08-01</td>
-                                        <td class="p-3 text-text">{{ __('registration.cash') ?? 'نقدي' }}</td>
-                                        <td class="p-3 font-medium text-text">70 ₪</td>
-                                        <td class="p-3 text-text">سارة</td>
-                                    </tr>
-                                    <tr class="hover:bg-surface/60">
-                                        <td class="p-3 text-text">2025-08-01</td>
-                                        <td class="p-3 text-text">{{ __('registration.bank_transfer') ?? 'تحويل بنكي' }}
-                                        </td>
-                                        <td class="p-3 font-medium text-text">30 ₪</td>
-                                        <td class="p-3 text-text">محمد</td>
-                                    </tr>
+                                    @forelse ($data->payments as $payment)
+                                        <tr class="hover:bg-surface/60">
+                                            <td class="p-3 text-text">{{ $payment->created_at->format('d/m/x') }}</td>
+                                            <td class="p-3 text-text">{{ $payment->amount }}</td>
+
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="6" class="px-4 sm:px-6 py-8 text-center">
+                                                <div class="flex flex-col items-center justify-center text-gray-500">
+                                                    <svg class="w-8 h-8 mb-2" fill="none" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="1.5"
+                                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                    </svg>
+                                                    <p class="text-sm font-medium">{{ __('common.no_data') }}</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforelse
+
+
                                 </tbody>
                             </table>
                         </div>
 
-                        <p class="mt-3 text-xs text-secondary">*
-                            {{ __('registration.late_payments_note') ?? 'المدفوعات المتأخرة ستظهر هنا عند إضافتها.' }}</p>
                     </div>
                 </div>
             </div>

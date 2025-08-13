@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\PaymentCreated;
 use App\Http\Controllers\Controller;
 use App\Models\Tenants\Debt;
 use App\Http\Requests\Admin\Debt\StoreDebtRequest;
 use App\Http\Requests\Admin\Debt\UpdateDebtRequest;
+use App\Models\Tenants\Payment;
+use Illuminate\Validation\ValidationException;
 
 class DebtController extends Controller
 {
@@ -14,7 +17,7 @@ class DebtController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.pages.debt.index');
     }
 
     /**
@@ -22,7 +25,7 @@ class DebtController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.debt.create');
     }
 
     /**
@@ -38,7 +41,9 @@ class DebtController extends Controller
      */
     public function show(Debt $debt)
     {
-        //
+        $debt->load(['customer:id,name', 'registration:id,start_date,end_date', 'payments:id,debt_id,amount,created_at']);
+
+        return view('admin.pages.debt.show', ['data' => $debt]);
     }
 
     /**
@@ -54,7 +59,32 @@ class DebtController extends Controller
      */
     public function update(UpdateDebtRequest $request, Debt $debt)
     {
-        //
+
+        $validated = $request->validated();
+
+        if ($validated['paid_amount'] > $validated['remaining_amount']) {
+            throw ValidationException::withMessages(['paid_amount' => __('debt.payment_validation')]);
+        }
+        $status = $request->getDebtStatus($validated['paid_amount'], $validated['remaining_amount']);
+        $debt->fill([
+            'paid' => $debt['paid'] + $validated['paid_amount'],
+            'status' => $status
+        ]);
+
+        if ($debt->isDirty()) {
+            $payment = Payment::create([
+                'customer_id' => $debt->customer_id,
+                'registration_id' => $debt->registration_id,
+                'debt_id' => $debt->id,
+                'amount' => $validated['paid_amount']
+            ]);
+
+
+            $debt->save();
+            event(new PaymentCreated($payment));
+            return redirect()->route('admin.debts.show', ['debt' => $debt])->with('success', __('debt.payment_successful'));
+        }
+        return redirect()->route('admin.debts.show', ['debt' => $debt])->with('error', __('debt.payment_fail'));
     }
 
     /**

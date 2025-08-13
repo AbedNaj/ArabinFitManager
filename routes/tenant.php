@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\DebtController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\RegistrationController;
 use App\Http\Middleware\Auth\TenantLoginCheck;
@@ -67,6 +68,14 @@ Route::middleware([
                 Route::post('/registrations', 'store')->name('store');
                 Route::get('/registrations/{registration}', 'show')->name('show');
                 Route::patch('/registrations/{registration}', 'update')->name('update');
+            });
+
+            Route::controller(DebtController::class)->name('debts.')->group(function () {
+                Route::get('/debts', 'index')->name('index');
+                Route::get('/debts/create', 'create')->name('create');
+
+                Route::get('/debts/{debt}', 'show')->name('show');
+                Route::patch('/debts/{debt}', 'update')->name('update');
             });
         });
     });

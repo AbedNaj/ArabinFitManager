@@ -58,8 +58,21 @@ class RegistrationController extends Controller
      */
     public function show(Registration $registration)
     {
-        $registration->load(['customer:id,name', 'plan:id,name,duration']);
-        return view('admin.pages.registration.show', ['data'   => $registration]);
+        $registration->load(['customer:id,name', 'debt:id,registration_id', 'plan:id,name,duration', 'payments:id,registration_id,amount,created_at']);
+
+        $totalPaid = 0;
+
+
+        foreach ($registration->payments as $item) {
+            $totalPaid += $item->amount;
+        }
+        $remainingAmount = $registration->price_at_signup - $totalPaid;
+
+        return view('admin.pages.registration.show', [
+            'data'   => $registration,
+            'totalPaid' =>  $totalPaid,
+            'remainingAmount' => $remainingAmount
+        ]);
     }
 
     /**

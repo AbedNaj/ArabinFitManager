@@ -16,7 +16,7 @@
         @if ($endDate)
             <p class="text-gray-500 text-sm">{{ __('registration.end_date') . ' : ' . $endDate }}</p>
         @endif
-
+        <x-input type="number" wire:model='paid_amount' label="{{ __('registration.paid_amounts') }}" />
         <div class="mt-2">
             <x-button type="submit" label="{{ __('registration.register') }}" />
             <x-button wire:navigate href="{{ route('admin.registrations.index') }}" label="{{ __('common.cancel') }}"

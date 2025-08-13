@@ -14,7 +14,9 @@ return [
     'not_registered' => 'غير مسجل',
     'frozen' => 'مجمد',
     'stopped' => 'موقوف',
-    'status' => 'الحالة'
+    'status' => 'الحالة',
+    'register' => 'تسجيل الزبون',
+    'register_description' => 'الانتقال مباشرة إلى صفحة التسجيل بعد إضافة الزبون'
 
 
 ];

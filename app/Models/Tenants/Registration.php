@@ -28,4 +28,9 @@ class Registration extends Model
 
         return $this->hasOne(Debt::class);
     }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

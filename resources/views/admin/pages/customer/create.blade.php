@@ -12,6 +12,23 @@
 
             <x-input name="name" label="{{ __('customer.name') }}" />
             <x-input name="phone" label="{{ __('customer.phone') }}" />
+            <div class="flex items-start gap-2 p-2 rounded-md border border-border bg-surface">
+                <input id="register" type="checkbox" name="register" value="true" checked
+                    class="mt-0.5 h-4 w-4 rounded border border-border bg-bg
+               accent-[var(--color-primary)]
+               focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:ring-offset-1
+               dark:focus:ring-offset-[var(--color-surface)]" />
+
+                <div class="leading-4">
+                    <label for="register" class="font-medium text-sm text-[var(--color-text)] cursor-pointer select-none">
+                        {{ __('customer.register') }}
+                    </label>
+                    <p class="text-xs mt-1 text-secondary">
+                        {{ __('customer.register_description') }}
+                    </p>
+                </div>
+            </div>
+
 
 
 

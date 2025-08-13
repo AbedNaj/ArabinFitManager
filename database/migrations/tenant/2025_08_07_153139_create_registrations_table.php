@@ -19,6 +19,8 @@ return new class extends Migration
             $table->foreignIdFor(Plan::class)->nullable()->constrained()->nullOnDelete();
             $table->date('start_date');
             $table->date('end_date');
+            $table->decimal('price_at_signup', 10, 2)->nullable();
+            $table->enum('payment_status', ['unpaid', 'partial', 'paid'])->default('unpaid');
             $table->enum('status', ['waiting', 'active', 'expired', 'freezed', 'stopped'])->default('active');
             $table->timestamps();
         });

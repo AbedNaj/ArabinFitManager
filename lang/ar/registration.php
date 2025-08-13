@@ -17,18 +17,18 @@ return [
     'pick_date' => 'اختر التاريخ',
     'plan_price' => 'سعر الخطة',
     'select_plan' => 'اختر الخطة',
-
-
+    'payment_status' => 'حالة الدفع',
+    'paid_amount_fail_message' => 'المبلغ المدفوع أعلى من مبلغ الخطه',
     'status_waiting'  => 'بانتظار البداية',
     'status_active'   => 'نشط',
     'status_expired'  => 'منتهي',
     'status_freezed'  => 'مجمّد',
     'status_stopped'  => 'موقوف',
-
+    'customer_details' => 'تفاصيل الزبون',
     'registred' => 'تم تسجيل الزبون',
     'successfully' => 'بنجاح',
 
-
+    'paid_amounts' => 'المبلغ المدفوع',
     'cancel' => 'إلغاء التسجيل',
     'id' => 'رقم التسجيل',
     'information' => 'المعلومات',
@@ -37,9 +37,9 @@ return [
     'total_amount' => 'المبلغ الكلي',
     'paid_amount' => 'المدفوع',
     'remaining' => 'المتبقي',
-    'payment_history' => 'سجل المدفوعات',
+    'payment_history' => 'سجل الدفعات',
     'last_update' => 'آخر تحديث',
-    'add_payment' => 'إضافة دفعة',
+    'add_payment' => 'دفع',
     'date' => 'التاريخ',
     'method' => 'الطريقة',
     'amount' => 'المبلغ',

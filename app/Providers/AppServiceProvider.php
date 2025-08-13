@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\PaymentCreated;
+use App\Listeners\UpdateRegistrationStatus;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Event;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +22,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Event::listen(
+            PaymentCreated::class,
+            [UpdateRegistrationStatus::class, 'handle']
+        );
     }
 }

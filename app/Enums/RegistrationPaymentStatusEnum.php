@@ -2,19 +2,18 @@
 
 namespace App\Enums;
 
-enum DebtStatusEnum: string
+enum RegistrationPaymentStatusEnum: string
 {
     case UNPAID = 'unpaid';
     case PARTIAL = 'partial';
     case PAID = 'paid';
-    case CANCELLED = 'cancelled';
+
     public function label(): string
     {
         return match ($this) {
             self::UNPAID   => __('debt.status_unpaid'),
             self::PARTIAL  => __('debt.status_partial'),
             self::PAID     => __('debt.status_paid'),
-            self::CANCELLED     => __('debt.cancelled'),
         };
     }
 
@@ -24,7 +23,6 @@ enum DebtStatusEnum: string
             self::UNPAID   => 'red',
             self::PARTIAL  => 'yellow',
             self::PAID     => 'green',
-            self::CANCELLED => 'gray',
         };
     }
 
