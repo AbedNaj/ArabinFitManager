@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\DebtStatusEnum;
 use App\Enums\RegistrationStatusEnum;
-use App\Http\Controllers\Controller;
+
 use App\Models\Tenants\Debt;
 use App\Models\Tenants\Payment;
 use App\Models\Tenants\Registration;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
