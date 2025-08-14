@@ -42,7 +42,7 @@ Route::middleware([
         });
 
         Route::middleware(TenantLoginCheck::class)->group(function () {
-            Route::get('/dashboard', App\Http\Controllers\Admin\DashboardController::class)->name('dashboard');
+
 
             Route::controller(CustomerController::class)->middleware(CustomerViewPermission::class)->name('customers.')->group(function () {
                 Route::get('/customers', 'index')->name('index');
