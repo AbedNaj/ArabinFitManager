@@ -8,6 +8,7 @@ use App\Models\Tenants\User;
 use App\Models\Tenants\UserType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
 
 class TenantController extends Controller
 {
@@ -63,6 +64,10 @@ class TenantController extends Controller
         ]);
 
         $user->assignRole('admin');
+        Permission::firstOrCreate(['name' => 'customers.view', 'guard_name' => 'tenant']);
+
+        $user->givePermissionTo('customers.view');
+
         \App\Models\Tenants\Gym::create([
             'name' => $validated['name'],
             'owner_name' => $validated['owner_name'] ?? '',
@@ -79,9 +84,13 @@ class TenantController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Tenant $tenant)
     {
-        //
+        $tenant->load('domain');
+
+        return view('superAdmin.pages.tenants.show', [
+            'tenant' => $tenant
+        ]);
     }
 
     /**

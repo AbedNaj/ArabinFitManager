@@ -106,7 +106,7 @@
                                     {{ __('registration.payment_history') ?? 'سجل المدفوعات' }}</h2>
 
                             </div>
-                            @if ($remainingAmount > 0)
+                            @if ($remainingAmount > 0 && $registrationStatus->value != App\Enums\RegistrationStatusEnum::STOPPED->value)
                                 <x-button wire:navigate
                                     href="{{ route('admin.debts.show', ['debt' => $data->debt->id ?? 0]) }}"
                                     label="{{ __('registration.add_payment') }}" />

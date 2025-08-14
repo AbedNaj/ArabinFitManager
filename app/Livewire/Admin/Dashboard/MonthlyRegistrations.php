@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Dashboard;
 
+use App\Enums\RegistrationStatusEnum;
 use App\Models\Tenants\Registration;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -17,9 +18,11 @@ class MonthlyRegistrations extends Component
             DB::raw('MONTH(start_date) as month'),
             DB::raw('count(id) as total')
         )
+
             ->groupBy('year', 'month')
             ->orderBy('year', 'desc')
             ->orderBy('month', 'desc')
+            ->where('status', '!=', RegistrationStatusEnum::STOPPED)
             ->limit(12)
             ->get();
 

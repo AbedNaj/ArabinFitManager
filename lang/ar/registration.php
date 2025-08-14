@@ -23,7 +23,7 @@ return [
     'status_active'   => 'نشط',
     'status_expired'  => 'منتهي',
     'status_freezed'  => 'مجمّد',
-    'status_stopped'  => 'موقوف',
+    'status_stopped'  => 'ملغي',
     'customer_details' => 'تفاصيل الزبون',
     'registred' => 'تم تسجيل الزبون',
     'successfully' => 'بنجاح',

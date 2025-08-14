@@ -30,6 +30,8 @@ foreach (config('tenancy.central_domains') as $domain) {
                 Route::get('/gyms', 'index')->name('index');
 
                 Route::get('/gyms/create', 'create')->name('create');
+
+                Route::get('/gyms/show/{tenant}', 'show')->name('show');
                 Route::post('/gyms/store', 'store')->name('store');
             });
         });

@@ -12,4 +12,5 @@ return [
     'submit' => 'إنشاء',
     'password' => 'كلمة المرور',
     'password_description' => 'كلمة مرور افتراضية للمسؤول',
+    'show' => 'عرض النادي'
 ];

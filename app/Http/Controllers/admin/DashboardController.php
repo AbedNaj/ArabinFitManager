@@ -40,7 +40,7 @@ class DashboardController extends Controller
       DebtStatusEnum::PARTIAL->value
     ])
       ->selectRaw('SUM(amount - paid) as total')
-      ->value('total');
+      ->value('total') ?? 0;
 
 
 

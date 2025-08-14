@@ -17,7 +17,7 @@ class Table extends Component
     public array $filters = [];
 
     public array $relationFilters = [];
-    public string $search = '', $searchField = 'name';
+    public string $search = '', $searchField = 'name', $searchFieldWith;
 
     public string $orderBy = 'created_at';
     public string $title = 'Table';
@@ -64,7 +64,14 @@ class Table extends Component
         $query->orderByDesc($this->orderBy);
 
         if ($this->search) {
-            $query->where($this->searchField, 'like', '%' . $this->search . '%');
+            if (!isset($this->searchFieldWith)) {
+                $query->where($this->searchField, 'like', '%' . $this->search . '%');
+            } else {
+
+                $query->whereHas($this->searchFieldWith, function ($query) {
+                    $query->where($this->searchField, 'like', '%' . $this->search . '%');
+                });
+            }
         }
 
         return $query->paginate(10);
