@@ -19,7 +19,9 @@ return [
     'central_domains' => [
         '127.0.0.1',
         'localhost',
-        'arabinfitmanager.test'
+        'arabinfitmanager.test',
+        'arabianfit.com',
+
     ],
 
     /**
