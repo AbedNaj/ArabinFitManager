@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DebtController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\RegistrationController;
@@ -41,9 +42,7 @@ Route::middleware([
         });
 
         Route::middleware(TenantLoginCheck::class)->group(function () {
-            Route::get('/dashboard', function () {
-                return view('admin.pages.dashboard');
-            })->name('dashboard');
+            Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
             Route::controller(CustomerController::class)->middleware(CustomerViewPermission::class)->name('customers.')->group(function () {
                 Route::get('/customers', 'index')->name('index');
@@ -60,6 +59,7 @@ Route::middleware([
                 Route::post('/plans', 'store')->name('store');
                 Route::get('/plans/{plan}', 'show')->name('show');
                 Route::patch('/plans/{plan}', 'update')->name('update');
+                Route::delete('/plans/{plan}', 'destroy')->name('delete');
             });
 
             Route::controller(RegistrationController::class)->name('registrations.')->group(function () {
@@ -68,6 +68,7 @@ Route::middleware([
                 Route::post('/registrations', 'store')->name('store');
                 Route::get('/registrations/{registration}', 'show')->name('show');
                 Route::patch('/registrations/{registration}', 'update')->name('update');
+                Route::delete('/registrations/{registration}', 'destroy')->name('delete');
             });
 
             Route::controller(DebtController::class)->name('debts.')->group(function () {
@@ -76,6 +77,7 @@ Route::middleware([
 
                 Route::get('/debts/{debt}', 'show')->name('show');
                 Route::patch('/debts/{debt}', 'update')->name('update');
+                Route::delete('/debts/{debt}', 'destroy')->name('delete');
             });
         });
     });

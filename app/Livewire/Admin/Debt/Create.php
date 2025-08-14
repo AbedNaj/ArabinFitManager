@@ -19,10 +19,10 @@ class Create extends Component
     public $debtDate, $debt_amount = 0, $paid_amount = 0, $note;
 
     protected $rules = [
-        'customer' => 'nullable|exists:customers,id',
+        'customer' => 'required|exists:customers,id',
         'debtDate' => 'required|date',
         'debt_amount' => 'min:1|numeric',
-        'paid_amount' => 'min:1|numeric',
+        'paid_amount' => 'min:0|numeric',
         'note' => 'nullable|string|max:1000'
     ];
     public function updatedCustomer()
@@ -30,7 +30,11 @@ class Create extends Component
 
         $this->reset('customerInfo');
 
-        $this->customerInfo = Customer::select('id', 'name')->where('id', $this->customer)->with(['debts:id,customer_id,amount,paid,status,debt_date'])->first();
+        $this->customerInfo = Customer::select('id', 'name')->where('id', $this->customer)
+            ->with(['debts' => function ($query) {
+                $query->select('id', 'customer_id', 'amount', 'paid', 'status', 'debt_date')
+                    ->where('status',  '!=', DebtStatusEnum::CANCELLED->value);
+            }])->first();
 
         $this->handleCustomerDebts();
     }

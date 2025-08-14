@@ -37,7 +37,7 @@ return [
     'has_debts' => 'عليه ديون',
     'no_debts' => 'ليس عليه ديون',
     'total_debts' => 'إجمالي الديون',
-    'paid_amount' => 'المسدّد',
+    'paid_amount' => 'المبلغ المدفوع',
     'remaining' => 'المتبقي',
     'paid_percentage' => 'نسبة السداد',
     'last_debts' => 'آخر ديون',
@@ -48,6 +48,12 @@ return [
     'create_success' => 'تم انشاء الدين بنجاح',
     'cancel' => 'إلغاء',
     'save_debt' => 'حفظ الدين',
+    'create_debt' => 'اضافة الدين',
     'payment_successful' => 'تمت عملية الدفع بنجاح',
     'payment_fail' => 'لم تنجح عملية الدفع',
+    'delete' => 'الغاء الدين',
+    'delete_title_description' => 'سيؤدي هذا الإجراء إلى الغاء الدين و  وحذف الدفعات المرتبه به ، ولا يمكن التراجع عنه بعد التأكيد.',
+    'delete_title' => 'الغاء الدين',
+    'cancel_success' => 'تم الغاء الدين بنجاح',
+    'cancel_fail' => 'لم يتم الغاء الدين'
 ];

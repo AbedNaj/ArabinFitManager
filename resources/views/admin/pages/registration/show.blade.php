@@ -19,16 +19,20 @@
                         <div class="text-white">
                             <h1 class="text-xl sm:text-2xl font-bold mb-1">{{ __('registration.title') }}</h1>
                             <p class="text-blue-100 dark:text-purple-100 text-sm">
-                                {{ __('registration.show_description') ?? 'عرض شامل لمعلومات الاشتراك وحالة الدفع والخطة.' }}
+                                {{ __('registration.show_description') }}
                             </p>
                         </div>
 
                         <div class="flex space-x-2 ">
-                            <x-button wire:navigate
-                                href="{{ route('admin.customers.show', ['customer' => $data->customer]) }}"
-                                label="{{ __('registration.customer_details') }}" />
+                            @if ($data->cusomter)
+                                <x-button wire:navigate
+                                    href="{{ route('admin.customers.show', ['customer' => $data->customer]) }}"
+                                    label="{{ __('registration.customer_details') }}" />
+                            @endif
+
                             @if ($data->status == $activeStatus || $data->status == $freezdStatus)
-                                <x-button negative icon="x-mark" label="{{ __('registration.cancel') }}" />
+                                <x-admin.delete-modal :route="route('admin.registrations.delete', ['registration' => $data->id])" :buttonLabel="__('registration.delete_title')" :description="__('registration.delete_title_description')"
+                                    :title="__('registration.delete_title')" />
                             @endif
 
 
@@ -46,7 +50,7 @@
 
                             </div>
                             <div class="mt-3 text-xl font-semibold text-text">{{ __('registration.customer_name') }}:
-                                {{ $data->customer->name }}
+                                {{ $data->customer->name ?? __('common.no_data') }}
                             </div>
                             <div class="mt-2 flex items-center gap-2">
                                 <span
@@ -58,7 +62,7 @@
 
                         <div class="rounded-xl border border-border bg-bg p-4 shadow-sm">
                             <h3 class="text-sm text-secondary">{{ __('registration.plan') }}</h3>
-                            <div class="mt-2 font-semibold text-text">{{ $data->plan->name }}</div>
+                            <div class="mt-2 font-semibold text-text">{{ $data->plan->name ?? __('common.no_data') }}</div>
                             <div class="mt-3 grid grid-cols-2 gap-2 text-sm">
                                 <div class="space-y-1">
                                     <p class="text-secondary">{{ __('registration.start_date') }}</p>
@@ -104,7 +108,7 @@
                             </div>
                             @if ($remainingAmount > 0)
                                 <x-button wire:navigate
-                                    href="{{ route('admin.debts.show', ['debt' => $data->debt->id]) }}"
+                                    href="{{ route('admin.debts.show', ['debt' => $data->debt->id ?? 0]) }}"
                                     label="{{ __('registration.add_payment') }}" />
                             @endif
 

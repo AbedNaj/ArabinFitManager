@@ -25,12 +25,24 @@
                             </template>
                         </div>
 
-                        <div class="flex space-x-2 rtl:space-x-reverse">
-                            <x-button label="{{ __('common.edit_data') }}" x-show="!editMode" @click="editMode = !editMode"
-                                class="bg-white/20 dark:bg-white/10 backdrop-blur-sm text-white border-white/20 hover:bg-white/30 dark:hover:bg-white/20 hover:border-white/40 transition-all duration-300" />
-                            <x-button x-cloak label="{{ __('common.edit_cancel') }}" x-show="editMode"
-                                @click="editMode = !editMode"
-                                class="bg-white/20 dark:bg-white/10 backdrop-blur-sm text-white border-white/20 hover:bg-white/30 dark:hover:bg-white/20 hover:border-white/40 transition-all duration-300" />
+                        <div class="flex space-x-2 ">
+
+                            <div>
+                                <x-button x-cloak label="{{ __('common.edit_cancel') }}" x-show="editMode"
+                                    @click="editMode = !editMode"
+                                    class="bg-white/20 dark:bg-white/10 backdrop-blur-sm text-white border-white/20 hover:bg-white/30 dark:hover:bg-white/20 hover:border-white/40 transition-all duration-300" />
+                            </div>
+
+                            <div>
+
+                                <x-button label="{{ __('common.edit_data') }}" x-show="!editMode"
+                                    @click="editMode = !editMode"
+                                    class="bg-white/20 dark:bg-white/10 backdrop-blur-sm text-white border-white/20 hover:bg-white/30 dark:hover:bg-white/20 hover:border-white/40 transition-all duration-300" />
+                            </div>
+                            <div>
+                                <x-admin.delete-modal :route="route('admin.plans.delete', ['plan' => $data->id])" :title="__('plan.plan_delete')" />
+                            </div>
+
                         </div>
                     </div>
                 </div>

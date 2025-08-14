@@ -11,6 +11,6 @@ return [
     'edit_plan_info' => 'تعديل معلومات الخطة',
     'days' => 'يوم',
     'create_success' => 'تم إضافة الخطة بنجاح',
-    'price' => 'السعر'
-
+    'price' => 'السعر',
+    'plan_delete' => 'حذف الخطة',
 ];

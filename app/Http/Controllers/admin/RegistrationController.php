@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\CustomerStatusEnum;
+use App\Enums\DebtStatusEnum;
+use App\Enums\RegistrationStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Tenants\Registration;
 use App\Http\Requests\Admin\Registration\StoreRegistrationRequest;
 use App\Http\Requests\Admin\Registration\UpdateRegistrationRequest;
 use App\Models\Tenants\Customer;
+use App\Models\Tenants\Debt;
+use App\Models\Tenants\Payment;
 use App\Models\Tenants\Plan;
 use Illuminate\Http\Request;
 
@@ -96,6 +101,19 @@ class RegistrationController extends Controller
      */
     public function destroy(Registration $registration)
     {
-        //
+        $registration->fill([
+            'status' => RegistrationStatusEnum::STOPPED->value
+        ]);
+
+        if ($registration->isDirty()) {
+            Customer::whereKey($registration->customer_id)->update([
+                'status' => CustomerStatusEnum::NOT_REGISTERED->value
+            ]);
+            Debt::where('registration_id', '=', $registration->id)->delete();
+            Payment::where('registration_id', '=', $registration->id)->delete();
+            $registration->save();
+            return redirect()->route('admin.registrations.show', ['registration' => $registration->id])->with('success', __('registration.cancel_success'));
+        }
+        return redirect()->route('admin.registrations.show', ['registration' => $registration->id])->with('error', __('registration.cancel_fail'));
     }
 }

@@ -65,7 +65,7 @@ class Table extends Component
         $query->orderByDesc($this->orderBy);
 
         if ($this->search) {
-            if (!$this->searchFieldWith) {
+            if (!isset($this->searchFieldWith)) {
                 $query->where($this->searchField, 'like', '%' . $this->search . '%');
             } else {
 

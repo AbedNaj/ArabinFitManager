@@ -67,7 +67,7 @@
                                 <div class="text-sm text-secondary">{{ __('debt.debt_status') }}</div>
                                 <div class="mt-2">
                                     <span
-                                        class="text-xs px-2 py-1 rounded bg-red-100 text-red-700 border border-red-200">
+                                        class="text-xs px-2 py-1 rounded bg-{{ $hasDebts ? 'red' : 'green' }}-100 text-{{ $hasDebts ? 'red' : 'green' }}-700 border border-{{ $hasDebts ? 'red' : 'green' }}-200">
                                         {{ $hasDebts ? __('debt.has_debts') : __('debt.no_debts') }}
                                     </span>
                                 </div>
@@ -175,7 +175,7 @@
                             </div>
 
                             <div>
-                                <x-datetime-picker label="{{ __('registration.start_date') }}"
+                                <x-datetime-picker label="{{ __('debt.debt_date') }}"
                                     placeholder="{{ __('registration.pick_date') }}" wire:model.live="debtDate"
                                     display-format="DD/MM/YYYY" without-time />
                             </div>
@@ -192,7 +192,7 @@
                             </button>
                             <button type="submit"
                                 class="inline-flex items-center rounded-lg bg-primary text-white px-4 py-2.5 shadow hover:opacity-90">
-                                {{ __('debt.save_debt') }}
+                                {{ __('debt.create_debt') }}
                             </button>
                         </div>
                     </form>

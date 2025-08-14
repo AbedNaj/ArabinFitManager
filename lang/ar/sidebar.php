@@ -10,7 +10,7 @@ return [
         'logout' => 'تسجيل الخروج',
     ],
     'admin' => [
-        'dashboard' => 'لوحة التحكم',
+        'dashboard' => 'الرئيسية',
         'customers' => 'الزبائن',
         'trainers' => 'المدربين',
         'subscriptions' => 'الاشتراكات',

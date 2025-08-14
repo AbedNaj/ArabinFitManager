@@ -44,8 +44,8 @@
                         <span class="font-medium" x-text="isRTL ? 'م.ع' : 'JD'"></span>
                     </div>
                     <div>
-                        <p class="text-sm font-medium" x-text="isRTL ? 'محمد أحمد' : 'John Doe'"></p>
-                        <p class="text-xs text-secondary" x-text="isRTL ? 'مدير النظام' : 'Administrator'"></p>
+                        <p class="text-sm font-medium">{{ $name }}</p>
+                        <p class="text-xs text-secondary">{{ $owner_name }}</p>
                     </div>
                 </div>
                 <button class="text-secondary hover:text-text">

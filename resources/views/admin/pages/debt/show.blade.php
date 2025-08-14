@@ -23,7 +23,12 @@
                                     href="{{ route('admin.registrations.show', ['registration' => $data->registration_id]) }}"
                                     wire:navigate label="{{ __('debt.see_registration_details') }}" />
                             @endif
-
+                            @if (
+                                $debtStatus->value != App\Enums\DebtStatusEnum::PAID->value &&
+                                    $debtStatus->value != App\Enums\DebtStatusEnum::CANCELLED->value)
+                                <x-admin.delete-modal :route="route('admin.debts.delete', ['debt' => $data->id])" :buttonLabel="__('debt.delete_title')" :description="__('debt.delete_title_description')"
+                                    :title="__('debt.delete_title')" />
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -129,8 +134,12 @@
                             </div>
 
                             <div class="flex flex-wrap items-center  gap-3">
+                                @if (
+                                    $debtStatus->value != App\Enums\DebtStatusEnum::PAID->value &&
+                                        $debtStatus->value != App\Enums\DebtStatusEnum::CANCELLED->value)
+                                    <x-button type="submit" label="{{ __('debt.pay') }}" lg />
+                                @endif
 
-                                <x-button type="submit" label="{{ __('debt.pay') }}" lg />
 
                             </div>
                         </form>

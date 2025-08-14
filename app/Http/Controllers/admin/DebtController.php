@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\DebtStatusEnum;
 use App\Events\PaymentCreated;
 use App\Http\Controllers\Controller;
 use App\Models\Tenants\Debt;
@@ -92,6 +93,18 @@ class DebtController extends Controller
      */
     public function destroy(Debt $debt)
     {
-        //
+        $debt->fill([
+            'status' => DebtStatusEnum::CANCELLED->value,
+            'paid' => 0
+        ]);
+
+        if ($debt->isDirty()) {
+
+
+            Payment::where('debt_id', '=', $debt->id)->delete();
+            $debt->save();
+            return redirect()->route('admin.debts.show', ['debt' => $debt->id])->with('success', __('debt.cancel_success'));
+        }
+        return redirect()->route('admin.debts.show', ['debt' => $debt->id])->with('error', __('debt.cancel_fail'));
     }
 }
