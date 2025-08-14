@@ -17,7 +17,7 @@ class DashboardController extends Controller
   /**
    * Handle the incoming request.
    */
-  public function __invoke(Request $request)
+  public function index(Request $request)
   {
 
     $expiredRegistrations = Registration::select('id', 'status', 'end_date')->where('status', '=', RegistrationStatusEnum::EXPIRED->value);

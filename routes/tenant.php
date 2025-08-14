@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\CustomerController;
-
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DebtController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\RegistrationController;
@@ -43,6 +43,10 @@ Route::middleware([
 
         Route::middleware(TenantLoginCheck::class)->group(function () {
 
+
+            Route::controller(DashboardController::class)->group(function () {
+                Route::get('/dashboard', 'index')->name('dashboard');
+            });
 
             Route::controller(CustomerController::class)->middleware(CustomerViewPermission::class)->name('customers.')->group(function () {
                 Route::get('/customers', 'index')->name('index');
