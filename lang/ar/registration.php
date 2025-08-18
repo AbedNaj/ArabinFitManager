@@ -52,4 +52,7 @@ return [
     'registration_cancelled_message' => 'تم الغاء التسجيل بنجاح',
     'cancel_fail' => 'لم يتم الغاء التسجيل',
     'cancel_success' => 'تم الغاء التسجيل بنجاح',
+    'select_status' => 'اختر حالة التسجيل',
+    'select_payment_status' => 'اختر حالة الدفع',
+
 ];

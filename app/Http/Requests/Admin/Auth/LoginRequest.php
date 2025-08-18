@@ -30,6 +30,7 @@ class LoginRequest extends FormRequest
         return [
             'email' => ['required', 'email'],
             'password'  => ['required', 'string'],
+            'remember' => ['nullable']
         ];
     }
     public function authenticated()
@@ -55,7 +56,8 @@ class LoginRequest extends FormRequest
             ]);
         }
 
-        Auth::guard('tenant')->login($user); // ✅ تسجيل الدخول الآمن بعد التحقق الكامل
+        Auth::guard('tenant')->login($user, (bool) $this->remember);
+
 
         $this->clearRateLimit();
     }

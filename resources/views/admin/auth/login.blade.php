@@ -38,7 +38,10 @@
 
 
             </div>
-
+            <label class="flex items-center space-x-2 mt-3">
+                <input type="checkbox" name="remember">
+                <span>{{ __('login.remember') }}</span>
+            </label>
 
             <div class="flex items-center justify-between text-sm">
 

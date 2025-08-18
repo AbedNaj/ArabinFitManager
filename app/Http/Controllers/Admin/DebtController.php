@@ -18,7 +18,15 @@ class DebtController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.debt.index');
+        $debtStatus = collect(DebtStatusEnum::cases())
+            ->map(fn($case) => [
+                'name' => $case->label(),
+                'id' => $case->value,
+            ])
+            ->toArray();
+        return view('admin.pages.debt.index', [
+            'debtStatus' => $debtStatus
+        ]);
     }
 
     /**

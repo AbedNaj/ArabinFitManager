@@ -8,4 +8,5 @@ return [
     'forgot_password' => 'نسيت كلمة المرور؟',
     'login_button' => 'تسجيل الدخول',
     'register' => 'إنشاء حساب جديد',
+    'remember' => 'تذكرني',
 ];

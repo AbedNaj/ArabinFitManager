@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\CustomerStatusEnum;
 use App\Http\Controllers\Controller;
 
 
@@ -16,8 +17,18 @@ class CustomerController extends Controller
      */
     public function index()
     {
+        $customerOptions = collect(CustomerStatusEnum::cases())->map(fn($case) => [
+            'name' => $case->label(),
+            'id' => $case->value,
+        ])->toArray();
 
-        return view('admin.pages.customer.index');
+        return view(
+            'admin.pages.customer.index',
+            [
+
+                'customerOptions' => $customerOptions
+            ]
+        );
     }
 
     /**

@@ -15,7 +15,7 @@ class Table extends Component
     public string $model;
     public array $columns = [];
     public array $with = [];
-    public array $filters = [];
+    protected array $filters = [];
 
     public array $relationFilters = [];
     public string $search = '', $searchField = 'name', $searchFieldWith;
@@ -24,18 +24,24 @@ class Table extends Component
     public string $title = 'Table';
     public string $detailsRouteName;
 
-
     public string $listener;
-    // Only supports simple search on the 'name' column within the same table.
-    // Advanced search with relationships requires custom implementation.
     public bool $allowSearch = true;
 
 
-    public function getListeners()
+
+
+    protected function getListeners()
     {
-        return [
-            $this->listener => '$refresh',
-        ];
+        return [$this->listener => 'setFilters'];
+    }
+
+    public function setFilters(?array $data): void
+    {
+
+
+        $this->filters = $data;
+
+        $this->resetPage();
     }
     public function getRowsProperty()
     {
@@ -48,9 +54,9 @@ class Table extends Component
 
 
 
-        foreach ($this->filters as $filter) {
-            if (!empty($filter['value'])) {
-                $query->where($filter['field'], $filter['operator'], $filter['value']);
+        foreach ($this->filters as $field => $value) {
+            if (filled($value)) {
+                $query->where($field, '=', $value);
             }
         }
 

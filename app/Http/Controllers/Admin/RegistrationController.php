@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\CustomerStatusEnum;
 use App\Enums\DebtStatusEnum;
+use App\Enums\RegistrationPaymentStatusEnum;
 use App\Enums\RegistrationStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Tenants\Registration;
@@ -22,7 +23,23 @@ class RegistrationController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.registration.index');
+
+        $registrationOptions = collect(RegistrationStatusEnum::cases())
+            ->map(fn($case) => [
+                'name' => $case->label(),
+                'id' => $case->value,
+            ])
+            ->toArray();
+        $paymentOptions = collect(RegistrationPaymentStatusEnum::cases())
+            ->map(fn($case) => [
+                'name' => $case->label(),
+                'id' => $case->value,
+            ])
+            ->toArray();
+        return view('admin.pages.registration.index', [
+            'registrationOptions' => $registrationOptions,
+            'paymentOptions' => $paymentOptions
+        ]);
     }
 
     /**
