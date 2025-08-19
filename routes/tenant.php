@@ -46,6 +46,7 @@ Route::middleware([
 
             Route::controller(DashboardController::class)->group(function () {
                 Route::get('/dashboard', 'index')->name('dashboard');
+                Route::get('/dashboard/expired-registrations', 'expiredRegistrations')->name('dashboard.expired.registrations');
             });
 
             Route::controller(CustomerController::class)->middleware(CustomerViewPermission::class)->name('customers.')->group(function () {

@@ -54,5 +54,6 @@ return [
     'cancel_success' => 'تم الغاء التسجيل بنجاح',
     'select_status' => 'اختر حالة التسجيل',
     'select_payment_status' => 'اختر حالة الدفع',
+    'renew' => 'تجديد الإشتراك',
 
 ];

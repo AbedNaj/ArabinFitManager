@@ -23,7 +23,8 @@
 
             <x-admin.card :data="$expiredToday" :icon="view('components.icons.expired')" iconColor="red" :title="__('dashboard.expired_today')" :subData="$expiredTotal"
                 :subTitle="__('dashboard.total_expired')">
-
+                <a href="{{ route('admin.dashboard.expired.registrations') }}"
+                    class="text-blue-500 text-xs hover:text-blue-400 hover:cursor-pointer">{{ __('dashboard.show_expired') }}</a>
             </x-admin.card>
             <x-admin.card :currency="true" :data="$currentIncome" :icon="view('components.icons.income')" iconColor="blue" :title="__('dashboard.mtd_revenue')">
 

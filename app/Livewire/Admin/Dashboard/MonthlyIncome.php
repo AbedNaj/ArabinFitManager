@@ -13,18 +13,15 @@ class MonthlyIncome extends Component
     public function mount()
     {
         $data = Payment::select(
-            DB::raw('YEAR(created_at) as year'),
-            DB::raw('MONTH(created_at) as month'),
+            DB::raw("DATE_FORMAT(created_at, '%Y-%m') as month_year"),
             DB::raw('SUM(amount) as total')
         )
-            ->groupBy('year', 'month')
-            ->orderBy('year', 'desc')
-            ->orderBy('month', 'desc')
+            ->groupBy('month_year')
+            ->orderBy('month_year', 'desc')
             ->limit(12)
             ->get();
 
-        $this->monthLabels = $data->pluck('month')->toArray();
-
+        $this->monthLabels = $data->pluck('month_year')->toArray();
         $this->monthlyRevenue = $data->pluck('total')->toArray();
     }
     public function render()

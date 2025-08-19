@@ -6,8 +6,11 @@
             <canvas id="registrationsChart" height="200"></canvas>
         </div>
 
-
+        @php
+            $isArabic = App::getLocale() == 'ar' ? true : false;
+        @endphp
         <script>
+            const isArabic = @json($isArabic);
             document.addEventListener('livewire:navigated', function() {
                 const ctx = document.getElementById('registrationsChart').getContext('2d');
 
@@ -42,6 +45,9 @@
                                         return value + ' ';
                                     }
                                 }
+                            },
+                            x: {
+                                reverse: isArabic
                             }
                         }
                     }

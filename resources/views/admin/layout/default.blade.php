@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="{{ App::currentLocale() }}" dir="rtl" x-data="{
+<html lang="{{ App::currentLocale() }}" dir="{{ App::getLocale() == 'ar' ? 'rtl' : 'ltr' }}" x-data="{
     darkMode: localStorage.getItem('darkMode') === 'true',
     sidebarOpen: window.innerWidth > 768,
     mobileSidebarOpen: false,
     isRTL: false
-}" x-init="$watch('darkMode', value => localStorage.setItem('darkMode', value));
-isRTL = document.documentElement.getAttribute('dir') === 'rtl';"
-    :class="{ 'dark': darkMode }" class="[unicode-bidi:plaintext]">
+}"
+    x-init="$watch('darkMode', value => localStorage.setItem('darkMode', value));
+    isRTL = document.documentElement.getAttribute('dir') === 'rtl';" :class="{ 'dark': darkMode }" class="[unicode-bidi:plaintext]">
 
 <head>
     <meta charset="UTF-8">

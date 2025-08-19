@@ -129,7 +129,7 @@
                             </div>
 
                             <div>
-                                <x-textarea label="{{ __('debt.notes') }}" readonly
+                                <x-input label="{{ __('debt.notes') }}" readonly
                                     value="{{ $data->note ?? __('debt.no_notes') }}" />
                             </div>
 

@@ -14,19 +14,17 @@ class MonthlyRegistrations extends Component
     public function mount()
     {
         $data = Registration::select(
-            DB::raw('YEAR(start_date) as year'),
-            DB::raw('MONTH(start_date) as month'),
+            DB::raw("DATE_FORMAT(start_date, '%Y-%m') as month_year"),
             DB::raw('count(id) as total')
         )
 
-            ->groupBy('year', 'month')
-            ->orderBy('year', 'desc')
-            ->orderBy('month', 'desc')
+            ->groupBy('month_year')
+            ->orderBy('month_year', 'desc')
             ->where('status', '!=', RegistrationStatusEnum::STOPPED)
             ->limit(12)
             ->get();
 
-        $this->monthLabels = $data->pluck('month')->toArray();
+        $this->monthLabels = $data->pluck('month_year')->toArray();
 
         $this->monthlyRegistrations = $data->pluck('total')->toArray();
     }

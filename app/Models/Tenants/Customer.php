@@ -18,7 +18,10 @@ class Customer extends Model
 
         return $this->hasMany(Registration::class);
     }
-
+    public function latestRegistration()
+    {
+        return $this->hasOne(Registration::class)->latestOfMany();
+    }
     public function debts()
     {
         return $this->hasMany(Debt::class);

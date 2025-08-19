@@ -4,9 +4,12 @@
         <canvas id="revenueChart" height="200"></canvas>
     </div>
 
-
+    @php
+        $isArabic = App::getLocale() == 'ar' ? true : false;
+    @endphp
     <script>
         document.addEventListener('livewire:navigated', function() {
+            const isArabic = @json($isArabic);
             const ctx = document.getElementById('revenueChart').getContext('2d');
 
             const revenueChart = new Chart(ctx, {
@@ -40,6 +43,9 @@
                                     return value + ' ₪';
                                 }
                             }
+                        },
+                        x: {
+                            reverse: isArabic
                         }
                     }
                 }

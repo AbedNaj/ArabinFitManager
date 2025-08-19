@@ -11,7 +11,7 @@ return [
     'last_30_days' => 'آخر 30 يومًا',
     'this_year' => 'هذه السنة',
     'current_year' => 'السنة الحالية',
-
+    'show_expired' => 'عرض الإشتراكات المنتهيه',
 
     'active_subscriptions' => 'الاشتراكات الفعّالة',
     'mtd_revenue' => 'إيرادات الشهر حتى الآن',
