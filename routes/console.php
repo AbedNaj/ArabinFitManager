@@ -13,5 +13,5 @@ Schedule::command('tenants:run', [
 Schedule::command('tenants:run', [
     'registration:active',
 ])
-    ->everySecond()
+    ->daily()
     ->withoutOverlapping();
