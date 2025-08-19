@@ -23,6 +23,12 @@ return new class extends Migration
             $table->enum('payment_status', ['unpaid', 'partial', 'paid'])->default('unpaid');
             $table->enum('status', ['waiting', 'active', 'expired', 'freezed', 'stopped'])->default('active');
             $table->timestamps();
+
+            $table->index(['status', 'end_date'], 'idx_reg_status_end');
+
+            $table->index(['customer_id', 'end_date'], 'idx_reg_customer_created');
+
+            $table->index('payment_status', 'idx_reg_payment_status');
         });
     }
 

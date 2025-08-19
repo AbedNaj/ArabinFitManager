@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name')->unique('uq_customers_name');
+            $table->fullText('name', 'ft_customers_name');
             $table->string('phone')->nullable();
             $table->enum('status', ['registered', 'not_registered'])->default('not_registered');
             $table->timestamps();
+            $table->index('status', 'idx_customers_status');
         });
     }
 

@@ -21,6 +21,10 @@ return new class extends Migration
             $table->foreignIdFor(Debt::class)->nullable()->constrained()->nullOnDelete();
             $table->decimal('amount', 10, 2);
             $table->timestamps();
+
+            $table->index(['customer_id', 'created_at'], 'idx_pay_customer_date');
+            $table->index('registration_id', 'idx_pay_registration');
+            $table->index('debt_id', 'idx_pay_debt');
         });
     }
 

@@ -28,8 +28,9 @@ class DashboardController extends Controller
         ->from('registrations')
         ->groupBy('customer_id');
     })->count('id');
+
     $expiredToday = (clone $expiredRegistrations)
-      ->whereDay('end_date', Carbon::now()->day)
+      ->whereDay('end_date', Carbon::now()->today())
       ->count('id');
 
 

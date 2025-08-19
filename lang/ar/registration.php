@@ -55,5 +55,8 @@ return [
     'select_status' => 'اختر حالة التسجيل',
     'select_payment_status' => 'اختر حالة الدفع',
     'renew' => 'تجديد الإشتراك',
+    'expired_registrations' => 'الإشتراكات المنتهية',
+    'expired_registrations_desc' => 'قائمة بجميع الاشتراكات التي انتهت صلاحيتها.',
+    'no_expired_reg' => 'لا توجد إشتراكات منتهية',
 
 ];

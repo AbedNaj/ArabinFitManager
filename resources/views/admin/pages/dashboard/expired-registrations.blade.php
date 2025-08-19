@@ -10,15 +10,17 @@
                     class="bg-gradient-to-r from-primary to-indigo-600 dark:from-primary dark:to-purple-600 px-4 sm:px-8 py-5">
                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                         <div class="text-white">
-                            <h1 class="text-xl sm:text-2xl font-bold mb-1">الاشتراكات المنتهية</h1>
-                            <p class="text-blue-100 dark:text-purple-100 text-sm">قائمة بجميع الاشتراكات التي انتهت صلاحيتها.
+                            <h1 class="text-xl sm:text-2xl font-bold mb-1">{{ __('registration.expired_registrations') }}
+                            </h1>
+                            <p class="text-blue-100 dark:text-purple-100 text-sm">
+                                {{ __('registration.expired_registrations_desc') }}
                             </p>
                         </div>
 
                         <div class="flex items-center gap-2">
                             <span
                                 class="inline-flex items-center rounded-full bg-white/15 backdrop-blur px-3 py-1 text-white text-sm">
-                                الإجمالي:
+                                {{ __('common.total') }}:
                                 <span
                                     class="font-semibold ms-1">{{ $registrations->total() ?? count($registrations ?? []) }}</span>
                             </span>
@@ -41,6 +43,8 @@
                                         {{ __('registration.start_date') }} </th>
                                     <th class="px-4 py-3 text-start text-text/70 font-semibold">
                                         {{ __('registration.end_date') }} </th>
+                                    <th class="px-4 py-3 text-start text-text/70 font-semibold">
+                                        {{ __('registration.status') }} </th>
                                     <th class="px-4 py-3 text-start text-text/70 font-semibold">
                                         {{ __('registration.payment_status') }} </th>
                                     <th class="px-4 py-3 text-start text-text/70 font-semibold">{{ __('common.actions') }}
@@ -80,12 +84,26 @@
                                                 {{ $registration->end_date }}
                                             </span>
                                         </td>
+                                        <td class="px-4 py-3 align-top">
+                                            @php
+
+                                                $registrationStatus = App\Enums\RegistrationStatusEnum::tryFrom(
+                                                    $registration->status,
+                                                );
+                                            @endphp
+                                            <span
+                                                class="inline-flex items-center rounded-full px-2 py-0.5 text-xs
+                                            bg-{{ $registrationStatus->color() }}-100/60 text-{{ $registrationStatus->color() }}-700 dark:bg-{{ $registrationStatus->color() }}-500/10 dark:text-{{ $registrationStatus->color() }}-300'">
+                                                {{ $registrationStatus->label() }}
+                                            </span>
+                                        </td>
 
                                         <td class="px-4 py-3 align-top">
                                             @php
                                                 $paymentStatus = App\Enums\RegistrationPaymentStatusEnum::tryFrom(
                                                     $registration->payment_status,
                                                 );
+
                                             @endphp
                                             <span
                                                 class="inline-flex items-center rounded-full px-2 py-0.5 text-xs
@@ -112,9 +130,8 @@
                                     <tr>
                                         <td colspan="7" class="px-4 py-10">
                                             <div class="flex flex-col items-center justify-center text-center gap-2">
-                                                <div class="text-xl">لا توجد اشتراكات منتهية</div>
-                                                <p class="text-text/60 text-sm">جميع الاشتراكات الحالية فعّالة أو بانتظار
-                                                    البدء.</p>
+                                                <div class="text-xl">{{ __('registration.no_expired_reg') }}</div>
+
                                             </div>
                                         </td>
                                     </tr>

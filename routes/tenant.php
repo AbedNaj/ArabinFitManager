@@ -32,9 +32,6 @@ Route::middleware([
     PreventAccessFromCentralDomains::class,
 
 ])->group(function () {
-    Route::get('/', function () {
-        return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
-    });
     Route::prefix('admin/')->name('admin.')->group(function () {
         Route::controller(LoginController::class)->group(function () {
             Route::get('/login', 'index')->name('login.index');

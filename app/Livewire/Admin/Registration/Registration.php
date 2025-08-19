@@ -36,8 +36,9 @@ class Registration extends Component
         $this->planDuration = $planInfo['duration'];
         $this->calculateEndDate();
     }
-    public function updatedStartDate()
+    public function updatedStartDate($value)
     {
+
         $this->calculateEndDate();
     }
 
@@ -47,13 +48,14 @@ class Registration extends Component
         if ($this->planDuration && $this->startDate) {
 
             $this->endDate = Carbon::parse($this->startDate)
-                ->addDays($this->planDuration + 1)
+                ->addDays($this->planDuration)
                 ->format('Y-m-d');
         }
     }
 
     public function register()
     {
+
         $this->validate();
         $this->checkPaidAmountValidation();
         $status = $this->checkRegistrationStatus($this->endDate, $this->startDate);
@@ -81,7 +83,7 @@ class Registration extends Component
     {
         $todayDate = Carbon::today();
         $status = match (true) {
-            $endDate < $todayDate => RegistrationStatusEnum::EXPIRED->value,
+            $endDate <= $todayDate => RegistrationStatusEnum::EXPIRED->value,
             $startDate > $todayDate => RegistrationStatusEnum::WAITING->value,
             default => RegistrationStatusEnum::ACTIVE->value,
         };

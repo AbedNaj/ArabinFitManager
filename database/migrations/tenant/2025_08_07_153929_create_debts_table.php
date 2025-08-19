@@ -25,6 +25,8 @@ return new class extends Migration
             $table->date('fully_paid_at')->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
+
+            $table->index(['customer_id', 'status'], 'idx_debts_customer_status');
         });
     }
 
