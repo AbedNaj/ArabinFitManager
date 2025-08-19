@@ -20,9 +20,6 @@ return [
         '127.0.0.1',
         'localhost',
         'arabianfit.com',
-        'arabinfitmanager.test',
-
-
     ],
 
     /**
