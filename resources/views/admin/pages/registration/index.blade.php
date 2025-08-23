@@ -20,5 +20,5 @@
                 'enum' => 'App\Enums\RegistrationPaymentStatusEnum',
             ],
         ]" searchFieldWith="customer" :title="__('registration.title')"
-        detailsRouteName="admin.registrations.show" />
+        orderBy="start_date" detailsRouteName="admin.registrations.show" />
 @endsection

@@ -7,6 +7,10 @@
           <x-modal-card title="{{ __('registration.pick_customer') }}" name="cardModal">
 
               <div class="space-y-3">
+                  <div class="flex justify-end">
+                      <x-button wire:navigate label="{{ __('customer.create_title') }}"
+                          href="{{ route('admin.customers.create') }}" />
+                  </div>
                   <div class="rounded-lg border border-dashed border-border bg-surface/60 p-4">
                       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                           <x-select class="min-w-full" label="{{ __('registration.select_customer') }}"

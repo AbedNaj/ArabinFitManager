@@ -99,52 +99,51 @@
                     </section>
 
 
-
-
-                    <section class="rounded-2xl border border-border bg-bg p-4 sm:p-6 shadow-sm mb-6">
-                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
-                            <h2 class="text-lg font-semibold text-text">{{ __('debt.debt_pay') }}</h2>
-
-                        </div>
-
-                        <form action="{{ route('admin.debts.update', ['debt' => $data]) }}" method="POST"
-                            class="space-y-5">
-                            @csrf
-                            @method('PATCH')
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div>
-                                    <x-input disabled="ture" label="{{ __('debt.customer_name') }}"
-                                        value="{{ $data->customer->name }}" />
-                                </div>
-                                <div>
-                                    <x-input readonly name="remaining_amount" label="{{ __('debt.remaining_debt') }}"
-                                        value="{{ ($data->amount ?? 0) - ($data->paid ?? 0) }}" />
-                                </div>
-
-                                <div>
-                                    <x-input value="0" name="paid_amount" min="0" type="number"
-                                        label="{{ __('debt.paid_amount') }}" />
-                                </div>
+                    @if (
+                        $debtStatus->value != App\Enums\DebtStatusEnum::PAID->value &&
+                            $debtStatus->value != App\Enums\DebtStatusEnum::CANCELLED->value)
+                        <section class="rounded-2xl border border-border bg-bg p-4 sm:p-6 shadow-sm mb-6">
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+                                <h2 class="text-lg font-semibold text-text">{{ __('debt.debt_pay') }}</h2>
 
                             </div>
 
-                            <div>
-                                <x-input label="{{ __('debt.notes') }}" readonly
-                                    value="{{ $data->note ?? __('debt.no_notes') }}" />
-                            </div>
+                            <form action="{{ route('admin.debts.update', ['debt' => $data]) }}" method="POST"
+                                class="space-y-5">
+                                @csrf
+                                @method('PATCH')
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div>
+                                        <x-input disabled="ture" label="{{ __('debt.customer_name') }}"
+                                            value="{{ $data->customer->name }}" />
+                                    </div>
+                                    <div>
+                                        <x-input readonly name="remaining_amount" label="{{ __('debt.remaining_debt') }}"
+                                            value="{{ ($data->amount ?? 0) - ($data->paid ?? 0) }}" />
+                                    </div>
 
-                            <div class="flex flex-wrap items-center  gap-3">
-                                @if (
-                                    $debtStatus->value != App\Enums\DebtStatusEnum::PAID->value &&
-                                        $debtStatus->value != App\Enums\DebtStatusEnum::CANCELLED->value)
+                                    <div>
+                                        <x-input value="0" name="paid_amount" min="0" type="number"
+                                            label="{{ __('debt.paid_amount') }}" />
+                                    </div>
+
+                                </div>
+
+                                <div>
+                                    <x-input label="{{ __('debt.notes') }}" readonly
+                                        value="{{ $data->note ?? __('debt.no_notes') }}" />
+                                </div>
+
+                                <div class="flex flex-wrap items-center  gap-3">
+
                                     <x-button type="submit" label="{{ __('debt.pay') }}" lg />
-                                @endif
 
 
-                            </div>
-                        </form>
-                    </section>
 
+                                </div>
+                            </form>
+                        </section>
+                    @endif
 
                     <section class="rounded-2xl border border-border bg-bg p-4 sm:p-6 shadow-sm">
                         <div class="flex items-center justify-between mb-3">

@@ -22,7 +22,7 @@ return [
     'pay' => 'دفع',
     'remaining_debt' => 'المبلغ المتبقي',
     'from' => 'من',
-
+    'is_for_registration' => 'تابع لتسجيل',
     'to' => 'الى',
     'payment_validation' => 'المبلغ المدفوع اكبر من المبلغ المتبقي',
     'debt_record' => 'سجل الديون',
@@ -57,5 +57,17 @@ return [
     'cancel_success' => 'تم الغاء الدين بنجاح',
     'cancel_fail' => 'لم يتم الغاء الدين',
     'select_debt_status' => 'اختر حالة الدين',
+    'debts'        => 'الديون',
+    'debt_overview' => 'ملخص الديون',
+    'total_debt'   => 'إجمالي الديون',
+    'next_due'     => 'موعد الاستحقاق التالي',
+    'debt_id'      => 'رقم الدين',
+
+    'items'        => 'ديون',
+    'payment_amount' => 'المبلغ المدفوع',
+    'pay_debt'     => 'دفع دين',
+    'pay_the_debt'     => 'دفع الدين',
+    'pay_all'      => 'دفع جميع الديون',
+    'pay_now'      => 'ادفع الآن',
 
 ];

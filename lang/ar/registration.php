@@ -58,5 +58,15 @@ return [
     'expired_registrations' => 'الإشتراكات المنتهية',
     'expired_registrations_desc' => 'قائمة بجميع الاشتراكات التي انتهت صلاحيتها.',
     'no_expired_reg' => 'لا توجد إشتراكات منتهية',
+    'registrations'            => 'الاشتراكات',
+    'registrations_history'    => 'سجل الاشتراكات',
+    'new_registration'         => 'تسجيل جديد',
+    'last_registration'        => 'آخر اشتراك',
 
+    'price'                    => 'السعر',
+    'period'                   => 'الفترة',
+    'last_status' => 'حالة اخر اشتراك',
+    'current_status'           => 'حالة الاشتراك الحالية',
+    'current_plan'             => 'الخطة الحالية',
+    'no_registrations'         => 'لا يوجد اشتراكات',
 ];

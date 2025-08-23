@@ -17,7 +17,7 @@ return [
     'status' => 'الحالة',
     'register' => 'تسجيل الزبون',
     'register_description' => 'الانتقال مباشرة إلى صفحة التسجيل بعد إضافة الزبون',
-    'select_status' => 'اختر حالة الزبون'
+    'select_status' => 'اختر حالة الزبون',
 
 
 ];

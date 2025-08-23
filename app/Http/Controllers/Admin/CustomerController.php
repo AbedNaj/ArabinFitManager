@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Tenants\Customer;
 use App\Http\Requests\Admin\Customer\StoreCustomerRequest;
 use App\Http\Requests\Admin\Customer\UpdateCustomerRequest;
+use App\Models\Tenants\Debt;
+use App\Models\Tenants\Registration;
 
 class CustomerController extends Controller
 {
@@ -48,7 +50,7 @@ class CustomerController extends Controller
         $validated = $request->validated();
 
         $customer =  Customer::create($validated);
-        if ($validated['register']) {
+        if (isset($validated['register'])) {
             return redirect()->route('admin.registrations.create', ['customer' => $customer->id])->with('success', __('customer.create_success'));
         }
         return redirect()->route('admin.customers.index')->with('success', __('customer.create_success'));
@@ -59,7 +61,11 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        return view('admin.pages.customer.show', ['data'   => $customer]);
+
+        return view('admin.pages.customer.show', [
+            'data'   => $customer,
+
+        ]);
     }
 
     /**

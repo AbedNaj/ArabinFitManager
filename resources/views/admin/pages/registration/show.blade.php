@@ -24,11 +24,11 @@
                         </div>
 
                         <div class="flex space-x-2 ">
-                            @if ($data->cusomter)
-                                <x-button wire:navigate
-                                    href="{{ route('admin.customers.show', ['customer' => $data->customer]) }}"
-                                    label="{{ __('registration.customer_details') }}" />
-                            @endif
+
+                            <x-button wire:navigate
+                                href="{{ route('admin.customers.show', ['customer' => $data->customer]) }}"
+                                label="{{ __('registration.customer_details') }}" />
+
 
                             @if ($data->status == $activeStatus || $data->status == $freezdStatus)
                                 <x-admin.delete-modal :route="route('admin.registrations.delete', ['registration' => $data->id])" :buttonLabel="__('registration.delete_title')" :description="__('registration.delete_title_description')"

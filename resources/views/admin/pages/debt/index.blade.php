@@ -15,6 +15,6 @@
             ['field' => 'amount', 'label' => __('debt.amount')],
             ['field' => 'paid', 'label' => __('debt.paid')],
             ['field' => 'status', 'label' => __('common.status'), 'enum' => 'App\Enums\DebtStatusEnum'],
-        ]" :title="__('registration.title')" searchFieldWith="customer"
+        ]" :title="__('registration.title')" searchFieldWith="customer" orderBy="debt_date"
         detailsRouteName="admin.debts.show" />
 @endsection

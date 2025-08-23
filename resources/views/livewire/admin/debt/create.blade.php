@@ -12,10 +12,7 @@
                         </p>
                     </div>
                     <div class="flex items-center gap-2">
-                        <a href="#"
-                            class="inline-flex items-center rounded-lg bg-white/10 text-white px-3 py-2 text-sm hover:bg-white/15">{{ __('debt.debt_record') }}</a>
-                        <a href="#"
-                            class="inline-flex items-center rounded-lg bg-white/10 text-white px-3 py-2 text-sm hover:bg-white/15">{{ __('debt.all_customers') }}</a>
+
                     </div>
                 </div>
             </div>
@@ -43,7 +40,46 @@
 
                 @if ($customer)
 
-                    <section class="rounded-xl border border-border bg-bg p-4 sm:p-6 shadow-sm mb-6"
+                    <section class="rounded-2xl border border-border bg-bg p-4 sm:p-6 shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-lg font-semibold text-text">{{ __('debt.add_debt') }}</h2>
+                        </div>
+
+                        <form wire:submit.prevent='create' method="POST" class="space-y-5">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <x-input type="number" wire:model='debt_amount' label="{{ __('debt.amount') }}" />
+                                </div>
+
+                                <div>
+                                    <x-input type="number" wire:model='paid_amount' label="{{ __('debt.paid') }}" />
+                                </div>
+
+                                <div>
+                                    <x-datetime-picker label="{{ __('debt.debt_date') }}"
+                                        placeholder="{{ __('registration.pick_date') }}" wire:model.live="debtDate"
+                                        display-format="DD/MM/YYYY" without-time />
+                                </div>
+                            </div>
+
+                            <div>
+                                <x-textarea label="{{ __('debt.notes') }}" wire:model='note' />
+                            </div>
+
+                            <div class="flex items-center justify-end gap-3">
+                                <button type="button"
+                                    class="inline-flex items-center rounded-lg border border-border bg-bg text-text px-4 py-2.5 hover:bg-surface">
+                                    {{ __('debt.cancel') }}
+                                </button>
+                                <button type="submit"
+                                    class="inline-flex items-center rounded-lg bg-primary text-white px-4 py-2.5 shadow hover:opacity-90">
+                                    {{ __('debt.create_debt') }}
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <section class="rounded-xl border border-border bg-bg p-4 sm:p-6 shadow-sm my-6"
                         id="customer-summary">
                         <div class="flex items-center justify-between mb-4">
                             <h2 class="text-lg font-semibold text-text">{{ __('debt.customer_summary') }}</h2>
@@ -156,48 +192,10 @@
                             </div>
                         </div>
                     </section>
+
+
+
                 @endif
-
-
-                <section class="rounded-2xl border border-border bg-bg p-4 sm:p-6 shadow-sm">
-                    <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-lg font-semibold text-text">{{ __('debt.add_debt') }}</h2>
-                    </div>
-
-                    <form wire:submit.prevent='create' method="POST" class="space-y-5">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div>
-                                <x-input type="number" wire:model='debt_amount' label="{{ __('debt.amount') }}" />
-                            </div>
-
-                            <div>
-                                <x-input type="number" wire:model='paid_amount' label="{{ __('debt.paid') }}" />
-                            </div>
-
-                            <div>
-                                <x-datetime-picker label="{{ __('debt.debt_date') }}"
-                                    placeholder="{{ __('registration.pick_date') }}" wire:model.live="debtDate"
-                                    display-format="DD/MM/YYYY" without-time />
-                            </div>
-                        </div>
-
-                        <div>
-                            <x-textarea label="{{ __('debt.notes') }}" wire:model='note' />
-                        </div>
-
-                        <div class="flex items-center justify-end gap-3">
-                            <button type="button"
-                                class="inline-flex items-center rounded-lg border border-border bg-bg text-text px-4 py-2.5 hover:bg-surface">
-                                {{ __('debt.cancel') }}
-                            </button>
-                            <button type="submit"
-                                class="inline-flex items-center rounded-lg bg-primary text-white px-4 py-2.5 shadow hover:opacity-90">
-                                {{ __('debt.create_debt') }}
-                            </button>
-                        </div>
-                    </form>
-                </section>
-
             </div>
         </div>
     </div>

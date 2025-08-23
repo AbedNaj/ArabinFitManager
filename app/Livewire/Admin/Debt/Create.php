@@ -30,15 +30,19 @@ class Create extends Component
 
         $this->reset('customerInfo');
 
+
+        $this->handleCustomerInfo();
+        $this->handleCustomerDebts();
+    }
+
+    public function handleCustomerInfo()
+    {
         $this->customerInfo = Customer::select('id', 'name')->where('id', $this->customer)
             ->with(['debts' => function ($query) {
                 $query->select('id', 'customer_id', 'amount', 'paid', 'status', 'debt_date')
                     ->where('status',  '!=', DebtStatusEnum::CANCELLED->value);
             }])->first();
-
-        $this->handleCustomerDebts();
     }
-
     public function updatedNotForCustomer($value)
     {
 
@@ -97,11 +101,17 @@ class Create extends Component
             'note' => $this->note
         ]);
 
-        return redirect()->route('admin.debts.index')->with('success', __('debt.create_success'));
+        return redirect()->route('admin.customers.show', ['customer' => $this->customer])->with('success', __('debt.create_success'));
     }
     public function mount()
     {
         $this->debtDate = now()->toDateString();
+
+        if (request()->filled('customer')) {
+            $this->customer = request()->input('customer');
+            $this->handleCustomerInfo();
+            $this->handleCustomerDebts();
+        }
     }
     public function render()
     {

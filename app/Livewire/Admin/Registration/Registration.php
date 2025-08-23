@@ -76,7 +76,7 @@ class Registration extends Component
 
             $this->handleRegistrationPayment($registration->id);
         }
-        return redirect()->route('admin.registrations.index')->with('success', __('registration.registred') . ' ' . $this->customerName . ' ' . __('registration.successfully'));
+        return redirect()->route('admin.customers.show', ['customer' => $this->customerID])->with('success', __('registration.registred') . ' ' . $this->customerName . ' ' . __('registration.successfully'));
     }
 
     public function checkRegistrationStatus($endDate, $startDate)
@@ -118,7 +118,8 @@ class Registration extends Component
             Payment::create([
                 'customer_id' => $this->customerID,
                 'registration_id' => $registrationID,
-                'amount' => $this->paid_amount
+                'amount' => $this->paid_amount,
+
             ]);
         }
 
@@ -128,8 +129,9 @@ class Registration extends Component
                 'customer_id' => $this->customerID,
                 'registration_id' => $registrationID,
                 'amount' => $debtValue,
-                'paid' => 0,
-                'status' => DebtStatusEnum::UNPAID->value
+                'paid' => $this->paid_amount,
+                'status' => DebtStatusEnum::UNPAID->value,
+                'debt_date' => $this->startDate
             ]);
         }
     }
