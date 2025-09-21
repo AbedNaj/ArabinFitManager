@@ -17,6 +17,15 @@ return new class extends Migration
             $table->string('owner_name');
             $table->string('location')->nullable();
             $table->string('phone')->nullable();
+            $table->enum('status', [
+                'trialing',
+                'active',
+                'grace',
+                'paused',
+                'suspended',
+                'canceled',
+                'archived',
+            ])->default('trialing');
             $table->timestamps();
         });
     }

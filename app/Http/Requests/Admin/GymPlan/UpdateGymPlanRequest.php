@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin\GymPlan;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateGymRequest extends FormRequest
+class UpdateGymPlanRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

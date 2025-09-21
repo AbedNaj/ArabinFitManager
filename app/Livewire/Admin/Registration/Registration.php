@@ -30,11 +30,16 @@ class Registration extends Component
     ];
     public function updatedPlan()
     {
-        $planInfo = Plan::select('price', 'duration')->where('id', '=', $this->plan)->first()->toArray();
+        if ($this->plan) {
+            $planInfo = Plan::select('price', 'duration')->where('id', '=', $this->plan)->first()->toArray();
 
-        $this->planPrice = $planInfo['price'];
-        $this->planDuration = $planInfo['duration'];
-        $this->calculateEndDate();
+            $this->planPrice = $planInfo['price'];
+            $this->planDuration = $planInfo['duration'];
+            $this->calculateEndDate();
+        } else {
+            $this->planPrice = null;
+            $this->planDuration = null;
+        }
     }
     public function updatedStartDate($value)
     {

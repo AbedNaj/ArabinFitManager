@@ -40,7 +40,6 @@ Route::middleware([
 
         Route::middleware(TenantLoginCheck::class)->group(function () {
 
-
             Route::controller(DashboardController::class)->group(function () {
                 Route::get('/dashboard', 'index')->name('dashboard');
                 Route::get('/dashboard/expired-registrations', 'expiredRegistrations')->name('dashboard.expired.registrations');

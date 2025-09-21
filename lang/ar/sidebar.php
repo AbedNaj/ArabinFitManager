@@ -19,5 +19,7 @@ return [
         'settings' => 'الإعدادات',
         'debt' => 'الديون',
         'registration' => 'التسجيل',
+        'logout' => 'تسجيل الخروج',
+
     ],
 ];
